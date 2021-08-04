@@ -4,7 +4,7 @@ import HW from '@/components/DataDisplay.vue'
 
 
 
-
+// Mock Data
 const data = [
   {
     "PlanetIdentifier": "KOI-1843.03",
@@ -295,11 +295,6 @@ const data = [
     "HostStarAgeGyr": ""
   },
 
-
-
-
-
-
 ]
 
   
@@ -339,12 +334,20 @@ describe('Checking orphone planet ', () => {
     assert.equal(1, wrapper.vm.yearTable[val].large);
   })
 })
+// Testing with real data 
 
-
-
-
-
-
+describe('Checking real Data results ', () => {
+  it('Checking the number for year 2004', async () => {
+    const wrapper = shallowMount(HW, {
+    });
+    await (wrapper.vm.getData());
+    wrapper.vm.getYearRecoard(wrapper.vm.response)
+    let val = wrapper.vm.yearTable.findIndex((year => year.Year == 2004));
+    assert.equal(2, wrapper.vm.yearTable[val].small);
+    assert.equal(5, wrapper.vm.yearTable[val].med);
+    assert.equal(0, wrapper.vm.yearTable[val].large);
+  })
+})
 
 
 
