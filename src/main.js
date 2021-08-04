@@ -7,6 +7,7 @@ import VueApexCharts from 'vue-apexcharts'
 
 import BootstrapVue from 'bootstrap-vue'
 Vue.use(BootstrapVue)
+
 Vue.use(VueApexCharts)
 Vue.component('apexchart', VueApexCharts)
 // Bootstrap css
