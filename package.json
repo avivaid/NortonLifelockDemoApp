@@ -20,8 +20,7 @@
     "moment": "^2.29.1",
     "vue": "^2.6.11",
     "vue-apexcharts": "^1.6.2",
-    "vue-chartjs": "^3.5.1",
-    "vue-chartkick": "^1.1.0"
+    "vue-chartjs": "^3.5.1"
   },
   "devDependencies": {
     "@babel/polyfill": "^7.7.0",
