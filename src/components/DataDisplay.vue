@@ -31,19 +31,23 @@
     </b-row>
     <b-row align-v = "center">
         <b-col >
-        <b-card title="Discovery Timeline Table" >
-          <p> The flowing tables shows the timeline of the discoverty of new Planets. The planets are grouped by size as 
+        <b-card title="Discovery Timeline Table" class = "text-center" v-if = "section ==1">
+           <p class = "text-left"> The flowing tables shows the timeline of the discoverty of new Planets. The planets are grouped by size as 
           small (less than 1 Jupiter radii), medium (less than 2 Jupiter radii), and large (anything bigger than 2 Jupiter radi).  
           </p> 
-           <div class = "text-center ">
             <b-table responsive sticky-header  striped hover class="mt-2" :items="yearTable" ></b-table>
-          </div>  
+          <b-button variant = "primary" v-on:click="click"> Chart </b-button> 
+      
       </b-card>
+        <b-card title="Discovery Timeline Chart" class = "text-center" v-else>
+            <div>
+           <apexchart width="1000" type="bar" :options="chartOptions" :series="series"></apexchart>
+           </div>
+        <b-button variant = "primary" v-on:click="click"> Table </b-button> 
+    
+         </b-card>
       </b-col>
      </b-row>
-          
-    
-    
   </b-container>
 </template>
 
@@ -58,6 +62,10 @@ export default {
         orphanPlanet: [],
         hotStarPlanet : [],
         yearTable:[],
+        section:1, 
+        chartOptions: null,
+        series: [] 
+        
     }
   }, 
   async created() {
@@ -65,9 +73,7 @@ export default {
          this.getOrphanPlanet(this.response) 
          this.getHottestPlanet(this.response)
          this.getYearRecoard(this.response)
-         this.yearTable.sort ((a, b) => {
-            return a.Year > b.Year
-         })
+          this.chartData()
     },
 
   methods: {
@@ -84,6 +90,14 @@ export default {
            }
         }
      }, 
+     click() {
+       if (this.section == 1) {
+         this.section =2; 
+       }
+       else {
+         this.section =1;
+       }
+     },
 
     getOrphanPlanet (response) {
       for (let res of response) {
@@ -129,9 +143,37 @@ export default {
           }
         }
     },
-    
+    chartData () {
+        let year =[], small =[], med = [], large =[]
+        for (let y of this.yearTable) {
+            year.push(y.Year)
+            small.push(y.small)
+            med.push(y.med)
+            large.push(y.large)
+        }
+      this.chartOptions = {
+          chart: {
+            id: 'timeline'
+          },
+          xaxis: {
+            categories: year,
+            lable:"Years"
+          }
+        }
 
+        this.series = [{
+          name: 'Small',
+          data: small
+        },
+        {
+          name: 'Medium',
+          data:med
+        },{
+          name: 'Large',
+          data: large
+        } ]
 
+    }
 
 
   }
