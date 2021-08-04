@@ -7,12 +7,17 @@
         <b-card title="About" style  class = "mb-1">
           <p> The application was built for the code demo for interview with norton lifelock. The links to dataset in json format and documation can be found below. The github page for the application
             is also linked below. </p> 
-           <div class = "text-center ">
-            <b-button variant = "primary"  href =  "https://gist.githubusercontent.com/joelbirchler/66cf8045fcbb6515557347c05d789b4a/raw/9a196385b44d4288431eef74896c0512bad3defe/exoplanets"> Dataset </b-button> 
-            <b-button variant = "primary" href = "https://www.kaggle.com/mrisdal/open-exoplanet-catalogue"> Documation </b-button>
-            <b-button variant = "primary" href = "https://github.com/avivaid/NortonLifelockDemoApp"> GitHub  </b-button>
-         
-          </div>  
+          <div class="text-center">
+            <b-button-group class="mx-1">
+            <b-button pill variant = "primary"  href =  "https://gist.githubusercontent.com/joelbirchler/66cf8045fcbb6515557347c05d789b4a/raw/9a196385b44d4288431eef74896c0512bad3defe/exoplanets"> Dataset </b-button> 
+            </b-button-group>
+            <b-button-group class="mx-1">
+            <b-button pill variant = "primary" href = "https://www.kaggle.com/mrisdal/open-exoplanet-catalogue"> Documation </b-button>
+            </b-button-group>
+            <b-button-group class="mx-1">
+            <b-button pill variant = "primary" href = "https://github.com/avivaid/NortonLifelockDemoApp"> GitHub  </b-button>
+            </b-button-group>
+        </div>
         </b-card>
         </b-col>
         </b-row>
@@ -36,14 +41,14 @@
           small (less than 1 Jupiter radii), medium (less than 2 Jupiter radii), and large (anything bigger than 2 Jupiter radi).  
           </p> 
             <b-table responsive sticky-header  striped hover class="mt-2" :items="yearTable" ></b-table>
-          <b-button variant = "primary" v-on:click="click"> Chart </b-button> 
+          <b-button pill variant = "primary" v-on:click="click"> Chart </b-button> 
       
       </b-card>
         <b-card title="Discovery Timeline Chart" class = "text-center" v-else>
             <div>
            <apexchart width="1000" type="bar" :options="chartOptions" :series="series"></apexchart>
            </div>
-        <b-button variant = "primary" v-on:click="click"> Table </b-button> 
+        <b-button pill variant = "primary" v-on:click="click"> Table </b-button> 
     
          </b-card>
       </b-col>
