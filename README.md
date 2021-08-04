@@ -10,7 +10,7 @@
  #### To run the unit tests in the docker container run 
     ```
     docker-compose run vue-app npm run test:unit
-   ```
+  
 
 ### You can also use npm to set up enviroment 
  #### To run the developemnt enviromment using npm run
@@ -18,7 +18,7 @@
     npm install
     npm run serve
     ```
- #### To run the unit tests in the docker container run 
+ #### To run the unit tests localy run
     ```
     npm run test:unit
-   ```
+   
