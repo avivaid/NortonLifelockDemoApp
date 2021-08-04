@@ -73,7 +73,10 @@ export default {
          this.getOrphanPlanet(this.response) 
          this.getHottestPlanet(this.response)
          this.getYearRecoard(this.response)
-          this.chartData()
+         this.yearTable.sort((a, b)=>{
+            return a.Year > b.Year           
+         })
+        this.chartData()
     },
 
   methods: {
@@ -81,9 +84,9 @@ export default {
       this.response = (await(axios.get(url))).data; 
     },
 
-    getHottestPlanet (response) {
+    getHottestPlanet () {
       let maxTemp = 0; 
-      for (let res of response) {
+      for (let res of this.response) {
         if (res.HostStarTempK != undefined && res.HostStarTempK > maxTemp) {
             maxTemp = res.HostStarTempK
              this.hotStarPlanet = res;  
@@ -99,15 +102,15 @@ export default {
        }
      },
 
-    getOrphanPlanet (response) {
-      for (let res of response) {
+    getOrphanPlanet () {
+      for (let res of this.response) {
         if (res.TypeFlag == 3) {
             this.orphanPlanet.push(res);
           }
         }
     }, 
-    getYearRecoard (response) {
-        for (let res of response) {
+    getYearRecoard () {
+        for (let res of this.response) {
         if (res.DiscoveryYear != "") {
           if(this.yearTable.some(year => year.Year == res.DiscoveryYear)){
               let val = this.yearTable.findIndex((year => year.Year == res.DiscoveryYear));
@@ -157,7 +160,6 @@ export default {
           },
           xaxis: {
             categories: year,
-            lable:"Years"
           }
         }
 
